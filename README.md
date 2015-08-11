@@ -30,6 +30,24 @@ save and run
  $ php artisan vendor:publish
  ```
  
+
+ Now, go to you `App\Console\Kernal.php` add these values to your `commands` array
+
+ ```php
+  protected $commands = [
+        MakeDatalayerClass::class,
+        MakeDatalayerInterface::class,
+        MakeDatalayerRepo::class,
+        MakeMultilayerSkeleton::class,
+        MakeHttpLayer::class,
+        MakeDataLayer::class,
+        BakeDataLayer::class,
+        MakeHttplayerAbstractMotor::class,
+        MakeHttpLayerMotor::class,
+        BakeAll::class,
+    ];
+ ```
+ 
  If it's your first time, and you still need to generate the new folder structure, please run:
  
  ```bash
