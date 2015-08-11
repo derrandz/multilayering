@@ -1,0 +1,16 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass extends Model
+{
+	public function RelationshipName()
+	{
+		return $this->hasMany('insert_class_name_here');
+	}
+
+	public function RelationshipName_belongs_to()
+	{
+		return $this->belongsTo('insert-class-here');
+	}
+}

@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Http\Motors;
+
+use App\Http\Traits\CRUDtrait;
+
+abstract class Motor
+{
+	protected $myRepository;
+	protected $views;
+	protected $routePrefix;
+
+	use /CRUDtrait;
+
+}

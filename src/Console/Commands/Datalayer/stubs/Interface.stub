@@ -1,0 +1,20 @@
+<?php
+
+
+
+namespace DummyNamespace;
+
+
+
+interface DummyInterface
+{
+
+
+	public function all();
+	public function create($params);
+	public function find($id);
+	public function update($params);
+	public function delete($id);
+
+
+}

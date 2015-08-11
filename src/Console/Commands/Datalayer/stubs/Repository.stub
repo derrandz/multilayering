@@ -1,0 +1,47 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Datalayer\Contracts\DummyInterface;
+use DummyClass;
+
+class DummyRepository implements DummyInterface
+{
+
+	public function all()
+	{
+		return DummyClass::all();
+	}
+
+
+	public function create($params)
+	{
+		return DummyClass::create($params);
+	}
+
+
+	public function find($id)
+	{
+		return DummyClass::find($id);
+	}
+
+
+	public function update($params)
+	{
+		$myinstance = $this->find($params['id']);
+
+		foreach ($params as $key => $value) 
+		{
+		    $myinstance[(string)$key] = $value;
+		}
+
+		return $myinstance->save();
+	}
+
+
+	public function delete($id)
+	{
+		return $this->find($id)->delete();
+	}
+
+}

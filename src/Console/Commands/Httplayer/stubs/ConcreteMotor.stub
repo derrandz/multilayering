@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Http\Motors;
+
+use DummyRepoInterface;
+use App\Http\Traits\CRUDtrait;
+
+class DummyMotor extends Motor
+{
+
+	public function __construct(DummyRepoInterface $repository)
+	{
+		$this->myRepository = $repository;
+		$this->views        = str_plural(strtolower('DummyMotor'));
+	}
+
+	use /CRUdtrait;
+}

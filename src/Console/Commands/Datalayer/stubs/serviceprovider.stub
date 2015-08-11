@@ -1,0 +1,48 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+class DatalayerServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap the application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        //
+    }
+
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->booting(function(){
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+
+
+        /*
+         |
+         | Contracts and Repositories
+         |
+         */
+            $loader->alias('Interface', 'App\Datalayer\Contracts\Interface');
+            $loader->alias('Repo', 'App\DataLayer\Repositories\Repo');
+            $loader->alias('Injection', 'Repo');
+            
+        /*
+         |
+         | Classes
+         |
+         */
+
+            $loader->alias('Class', 'App\DataLayer\Objects\Class');
+        });
+    }
+}
