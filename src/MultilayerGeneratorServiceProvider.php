@@ -24,7 +24,8 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
         MakeHttplayerAbstractMotor::class,
         MakeHttpLayerMotor::class,
         BakeAll::class,
-    ]
+    ];
+    
     /**
      * Perform post-registration booting of services.
      *
