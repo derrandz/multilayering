@@ -57,9 +57,9 @@ class MakeHttpLayerMotor extends GeneratorCommand
     public function fire()
     {
         $name      = $this->parseName($this->getNameInput());
-        $name = $this->editName($name);
+        $fileName = $this->editName($name);
 
-        if ($this->files->exists($path = $this->getPath($name))) {
+        if ($this->files->exists($path = $this->getPath($fileName))) {
             $this->error($this->type.' already exists!');
 
             return false;
@@ -69,12 +69,12 @@ class MakeHttpLayerMotor extends GeneratorCommand
 
         $this->files->put($path, $this->buildClass($name));
 
-        $this->info($this->type.' created successfully. '.$name.'.php');
+        $this->info($this->type.' created successfully. '.$fileName.'.php');
     }
 
     protected function editName($name)
     {
-        return str_replace("App", "App\Http\Motors", $name);
+        return str_replace("App", "App\Http\Motors", $name.'Motor');
     }
 
 
@@ -82,10 +82,10 @@ class MakeHttpLayerMotor extends GeneratorCommand
     {
         $isTraitPresent     = false;
         $isInterfacePresent = false;
-
-        $stub  = $this->files->get($this->getStub());
-        $className = $this->parseMotor($this->getMotorInput());
-        $motor = $className.'Motor';
+        
+        $stub          = $this->files->get($this->getStub());
+        $className     = $this->parseMotor($this->getMotorInput());
+        $motor         = $className.'Motor';
         $repoInterface = $className.'RepoInterface';
 
         if( !is_null( $trait = $this->getTraitInput() ) )
@@ -105,12 +105,12 @@ class MakeHttpLayerMotor extends GeneratorCommand
             {
                 //This is the stub where there is no line for a trait use;
                 $stub              = $this->files->get($this->getStub());
-                return $this->replaceNamespace($stub, $name)->replaceMotor( $this->replaceRepoInterface($stub, $repoInterface), $motor);
+                return $this->replaceNamespace($stub, $name)->replaceMotor( $this->replaceRepoInterface($this->replaceView($stub, $className), $repoInterface), $motor);
             }   
-            return $this->replaceNamespace($stub, $name)->replaceMotor( $this->replaceRepoInterface($this->replaceTrait($stub, $trait), $motor), $motor);
+            return $this->replaceNamespace($stub, $name)->replaceMotor( $this->replaceRepoInterface($this->replaceTrait($this->replaceView($stub, $className), $trait.'Trait'), $motor), $motor);
         }
 
-       return $this->replaceNamespace($stub, $name)->replaceMotor( $this->replaceRepoInterface($this->replaceTrait($stub, $trait), $repoInterface), $motor);
+       return $this->replaceNamespace($stub, $name)->replaceMotor( $this->replaceRepoInterface($this->replaceTrait($this->replaceView($stub, $className), $trait.'Trait'), $repoInterface.'RepoInterface'), $motor);
 
     }
 
@@ -141,6 +141,13 @@ class MakeHttpLayerMotor extends GeneratorCommand
         $trait     = str_replace($this->getNamespace($name).'\\', '', $name);
 
         return str_replace('DummyTrait', $trait, $stub);
+    }
+
+    protected function replaceView($stub, $name)
+    {
+        $motor     = str_replace($this->getNamespace($name).'\\', '', $name);
+        
+        return str_replace('view', $motor, $stub);
     }
 
     /*

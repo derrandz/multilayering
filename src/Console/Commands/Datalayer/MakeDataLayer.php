@@ -104,8 +104,9 @@ class MakeDataLayer extends Command
 
     protected function makeDirectory($path)
     {
-        if (!$this->files->isDirectory(dirname($path))) {
-            $this->files->makeDirectory(dirname($path), 0777, true, true);
+        if (!$status = $this->files->isDirectory(dirname($path))) {
+            return $this->files->makeDirectory(dirname($path), 0777, true, true);
         }
+        return $status;
     }
 }

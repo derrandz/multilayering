@@ -11,7 +11,7 @@ class DummyMotor extends Motor
 	public function __construct(DummyRepoInterface $repository)
 	{
 		$this->myRepository = $repository;
-		$this->views        = str_plural(strtolower('DummyMotor'));
+		$this->views        = str_plural(strtolower('view'));
 	}
 
 	use /CRUdtrait;

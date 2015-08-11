@@ -49,10 +49,18 @@ class BakeDataLayer extends Command
         {
             $interface = $this->makeInterfaceName();
         }
+        else
+        {
+            $interface = $interface.'Interface';
+        }
 
         if(is_null( $repository = $this->getRepositoryInput() ))
         {
             $repository = $this->makeRepositoryName();
+        }
+        else
+        {
+            $repository = $repository.'Repository';
         }
 
         Artisan::call('make:datalayer:class', ['name' => $class]);
