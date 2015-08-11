@@ -23,6 +23,7 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         $this->app->booting(function(){
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         /*
@@ -47,7 +48,7 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          | Traits 
          |  
          */
-            $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');
+            // $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');
 
         /*
          |
@@ -55,8 +56,11 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |  
          */
 
-            $loader->alias('Motor', 'App\Http\Motors\Motor');
+            // $loader->alias('Motor', 'App\Http\Motors\Motor');
             // $loader->alias('MyNewMotor', 'App\Http\Controllers\Motors\MyNewMotor');
         });
+
+        $this->commands($this->commands);
+
     }
 }

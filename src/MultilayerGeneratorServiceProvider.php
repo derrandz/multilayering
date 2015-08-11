@@ -13,19 +13,6 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
      *@var array
      */
 
-    protected $commands = [
-        MakeDatalayerClass::class,
-        MakeDatalayerInterface::class,
-        MakeDatalayerRepo::class,
-        MakeMultilayerSkeleton::class,
-        MakeHttpLayer::class,
-        MakeDataLayer::class,
-        BakeDataLayer::class,
-        MakeHttplayerAbstractMotor::class,
-        MakeHttpLayerMotor::class,
-        BakeAll::class,
-    ];
-    
     /**
      * Perform post-registration booting of services.
      *
@@ -42,9 +29,7 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
      * @return void
      */
     public function register()
-    {
-        $this->commands($this->commands);
-        
+    {        
         $this->publishes([
                 __DIR__.'/providers/MultilayerGeneratorServiceProvider.php' => app_path('Providers/MultilayerGeneratorServiceProvider.php'),
         ]);
