@@ -31,7 +31,7 @@ save and run
  ```
  
 
- Now, go to you `App\Console\Kernal.php` add these values to your `commands` array
+ Now, go to you `App\Console\Kernel.php` add these values to your `commands` array
 
  ```php
   protected $commands = [
