@@ -1,6 +1,6 @@
 <?php
 
-namespace edenho\multilayergenerator\Console\Commands\Datalayer;
+namespace Hamzaouaghad\Multilayering\Console\Commands\Datalayer;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;

@@ -1,6 +1,6 @@
 <?php
 
-namespace edenho\multilayergenerator\Console\Commands;
+namespace Hamzaouaghad\Multilayering\Console\Commands;
 
 use Illuminate\Console\Command;
 use File;

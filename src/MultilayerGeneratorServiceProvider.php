@@ -1,6 +1,6 @@
 <?php
 
-namespace Edenho\Multilayergenerator;
+namespace Hamzaouaghad\Multilayering;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -57,11 +57,11 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
              |
              */
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('MakeDatalayerClass', 'Edenho\Multilayergenerator\Console\Commands\Datalayer\MakeDatalayerClass');
-            $loader->alias('MakeDatalayerInterface', 'Edenho\Multilayergenerator\Console\Commands\Datalayer\MakeDatalayerInterface');
-            $loader->alias('MakeDatalayerRepo', 'Edenho\Multilayergenerator\Console\Commands\Datalayer\MakeDatalayerRepo');
-            $loader->alias('BakeDataLayer', 'Edenho\Multilayergenerator\Console\Commands\Datalayer\BakeDataLayer');
-            $loader->alias('MakeDataLayer', 'Edenho\Multilayergenerator\Console\Commands\Datalayer\MakeDataLayer');
+            $loader->alias('MakeDatalayerClass', 'Hamzaouaghad\Multilayering\Console\Commands\Datalayer\MakeDatalayerClass');
+            $loader->alias('MakeDatalayerInterface', 'Hamzaouaghad\Multilayering\Console\Commands\Datalayer\MakeDatalayerInterface');
+            $loader->alias('MakeDatalayerRepo', 'Hamzaouaghad\Multilayering\Console\Commands\Datalayer\MakeDatalayerRepo');
+            $loader->alias('BakeDataLayer', 'Hamzaouaghad\Multilayering\Console\Commands\Datalayer\BakeDataLayer');
+            $loader->alias('MakeDataLayer', 'Hamzaouaghad\Multilayering\Console\Commands\Datalayer\MakeDataLayer');
 
 
             /*
@@ -70,18 +70,18 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
              |
              */
 
-            $loader->alias('MakeHttpLayer', 'Edenho\Multilayergenerator\Console\Commands\Httplayer\MakeHttpLayer');
-            $loader->alias('MakeHttpLayerMotor', 'Edenho\Multilayergenerator\Console\Commands\Httplayer\MakeHttpLayerMotor');
-            $loader->alias('MakeHttplayerAbstractMotor', 'Edenho\Multilayergenerator\Console\Commands\Httplayer\MakeHttplayerAbstractMotor');
-            $loader->alias('MakeHttpLayerTrait', 'Edenho\Multilayergenerator\Console\Commands\Httplayer\MakeHttpLayerTrait');
+            $loader->alias('MakeHttpLayer', 'Hamzaouaghad\Multilayering\Console\Commands\Httplayer\MakeHttpLayer');
+            $loader->alias('MakeHttpLayerMotor', 'Hamzaouaghad\Multilayering\Console\Commands\Httplayer\MakeHttpLayerMotor');
+            $loader->alias('MakeHttplayerAbstractMotor', 'Hamzaouaghad\Multilayering\Console\Commands\Httplayer\MakeHttplayerAbstractMotor');
+            $loader->alias('MakeHttpLayerTrait', 'Hamzaouaghad\Multilayering\Console\Commands\Httplayer\MakeHttpLayerTrait');
 
             /*
              |
              | General
              |
              */
-            $loader->alias('MakeMultilayerSkeleton', 'Edenho\Multilayergenerator\Console\Commands\MakeMultilayerSkeleton');
-            $loader->alias('BakeAll', 'Edenho\Multilayergenerator\Console\Commands\BakeAll');
+            $loader->alias('MakeMultilayerSkeleton', 'Hamzaouaghad\Multilayering\Console\Commands\MakeMultilayerSkeleton');
+            $loader->alias('BakeAll', 'Hamzaouaghad\Multilayering\Console\Commands\BakeAll');
         });
     }
 

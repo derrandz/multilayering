@@ -1,6 +1,6 @@
 <?php
 
-namespace edenho\multilayergenerator\Console\Commands\Httplayer;
+namespace Hamzaouaghad\Multilayering\Console\Commands\Httplayer;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
