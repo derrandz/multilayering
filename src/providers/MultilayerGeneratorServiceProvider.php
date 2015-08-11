@@ -30,6 +30,9 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |
          | Repositories Classes
          |
+         |
+         |  Add your newly created repositories as follows
+         |
          */
 
             // $loader->alias('MyClassRepository', 'App\DataLayer\Repositories\MyClassRepository');
@@ -39,6 +42,9 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |
          | Object Classes
          |
+         |
+         | Add your newly created object classes as follows
+         |
          */
          
             // $loader->alias('MyClass', 'App\DataLayer\Objects\MyClass');
@@ -47,6 +53,10 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |
          | Traits 
          |  
+         | If you have generated any traits, add them as follows.
+         | if you have generated the whole directory structure with `make:multilayer`
+         | Uncomment the 'crudtrait' trait and vendor:publish
+         |
          */
             // $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');
 
@@ -54,13 +64,13 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |
          | Motors
          |  
+         |
+         | Add your newly created motor
          */
 
             // $loader->alias('Motor', 'App\Http\Motors\Motor');
             // $loader->alias('MyNewMotor', 'App\Http\Controllers\Motors\MyNewMotor');
         });
-
-        $this->commands($this->commands);
 
     }
 }

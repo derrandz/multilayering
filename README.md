@@ -20,6 +20,7 @@ Make sure you add this line in your `Config\app.php`
  'providers' => [
 
  Hamzaouaghad\Multilayering\MultilayerGeneratorServiceProvider::class,
+ Hamzaouaghad\Multilayering\RegisterCommandsServiceProvider::class,
 
  ],
 ```
@@ -29,19 +30,23 @@ save and run
 ```bash
  $ php artisan vendor:publish
  ```
- 
+ Now to go your 'app/providers/', you will find two new providers add :
+
+`MultilayerGeneratorServiceProvider`
+
  If it's your first time, and you still need to generate the new folder structure, please run:
  
  ```bash
  php artisan make:multilayer
  ```
  
+ And afterwards, go to your service providers, and uncomment the abstract motor class as well as the crudtrait in `MultilayeringGeneratorServiceProvider`.
+
+
  If you wish to quicken the paste, and bake all, you may use the following command :
  ```bash
  php artisan bake:all ClassName
  ```
-
-
  This command will generate an eloquent class, an interface for it, and a repository that uses this interface. Also, at the http layer, it generates a motor for it that injects that repository.
 
  If you may to bake all with specifics, you may use the following options:
@@ -52,13 +57,44 @@ save and run
 --repository : the name of the repository that this class would be covered under.
 ```
 
+Don't forget to go your service providers, in your `MultilayeringGeneratorServiceProvider`,add everything you created appropriately as described in the comments,
 
--Example :
+
+--Example :
 ```bash
-php artisan bake:all myClass --repository=MyCustomNewRepo --interface=MyOwnNewInterface --motor=MyNewMotor --trait=TheTraitThatTheMotorWillImplement
+php artisan bake:all User --repository=Accounts --interface=Security --motor=STAFF --trait=Authentication
 ```
 
-After running this command, you will have to add the new classes and interfaces to the `Providers\MultilayerGeneratorServiceProvide` as follows:
+This will create :
+
+```php
+class User extends Eloquent
+```
+and
+```php
+interface SecurityInterface
+```
+and
+
+```php
+class AccountsRepository implements SecurityInterface
+```
+
+and
+
+```php
+class STAFFmotor extends Motor
+{
+ public function __construct(AccountsRepository $repo)
+ {
+    $this->repository = $repo;
+ }
+
+ use /Authentication;
+}
+```
+
+After all of this, you will have to add the new classes and interfaces to the `Providers\MultilayerGeneratorServiceProvider` as aliases this way :
 
 ```php
 
@@ -89,8 +125,8 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |
          */
 
-            // $loader->alias('MyClassRepository', 'App\DataLayer\Repositories\MyClassRepository');
-            // $loader->alias('MyClassRepoInterface', 'MyClassRepository');
+             $loader->alias('AccountsRepository', 'App\DataLayer\Repositories\AccountsRepository');
+             $loader->alias('AccountsRepoInterface', 'AccountsRepository');
             
         /*
          |
@@ -98,7 +134,7 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |
          */
          
-            // $loader->alias('MyClass', 'App\DataLayer\Objects\MyClass');
+             $loader->alias('User', 'App\DataLayer\Objects\User');
 
         /*
          |
@@ -106,6 +142,7 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |  
          */
             $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');//don't modify this.
+            $loader->alias('AuthenticationTrait', 'App\Http\Traits\Authentication');
 
         /*
          |
@@ -114,14 +151,18 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          */
 
             $loader->alias('Motor', 'App\Http\Motors\Motor');
-            // $loader->alias('MyNewMotor', 'App\Http\Controllers\Motors\MyNewMotor');
+            $loader->alias('STAFFmotor', 'App\Http\Controllers\Motors\STAFFmotor');
         });
     }
 }
 
 ```
 
-To each class you have created, add the appropriate lines for it so you app recognize it as `myClass` instead of using the long names.
+If you wish to avoid all of this, just make use of the `use` statements, like this:
+
+`use App\Http\Motors\STAFFmotor as STAFFmotor` 
+
+for instance.
 
 ######Note that the multilayer conventions stands heavily on the shortnamed classes, so adding these aliases is of higher importance.
  Available commands
