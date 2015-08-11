@@ -39,10 +39,11 @@ class MakeMultilayerSkeleton extends Command
      */
     public function handle()
     {
-        Artisan::call('make:httplayer');
-        $this->info(Artisan::output());
 
         Artisan::call('make:datalayer');
+        $this->info(Artisan::output());
+
+        Artisan::call('make:httplayer');
         $this->info(Artisan::output());
 
         $this->info('=========================================');

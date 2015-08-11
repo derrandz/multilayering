@@ -49,7 +49,7 @@ class MakeDataLayer extends Command
             return false;
         }
 
-        $this->info('app\Datalayer has been successfully created!');
+        $this->info('app\Datalayer has been successfully created! \n');
 
         if(!$this->makeContractsDirectory())
         {
@@ -104,9 +104,10 @@ class MakeDataLayer extends Command
 
     protected function makeDirectory($path)
     {
-        if (!$status = $this->files->isDirectory(dirname($path))) {
-            return $this->files->makeDirectory(dirname($path), 0777, true, true);
+        if (!$this->files->isDirectory($path)) {
+            return $this->files->makeDirectory($path, 0777, true, true);
         }
-        return $status;
+
+        return false;
     }
 }
