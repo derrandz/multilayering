@@ -71,10 +71,19 @@ So bare the pain of keeping your work organized, it's worth it.
 --repository : the name of the repository that this class would be covered under.
 ```
 
-Don't forget to go your service providers, in your `MultilayeringGeneratorServiceProvider`,add everything you created appropriately as described in the comments,
+After each file generation, you'll have to run 
+
+```php
+
+$ php artisan vendor:publish
+
+```
+
+As it will mention to you everytime, so I think you won't forget.
 
 
---Example :
+##Examples 
+
 ```bash
 php artisan bake:all User --repository=Accounts --interface=Security --motor=STAFF --trait=Authentication
 ```
@@ -108,7 +117,7 @@ class STAFFmotor extends Motor
 }
 ```
 
-After all of this, you will have to add the new classes and interfaces to the `Providers\MultilayerGeneratorServiceProvider` as aliases this way :
+After all of this, the  `Providers\MultilayerGeneratorServiceProvider` will be updated as follows :
 
 ```php
 
@@ -171,12 +180,6 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
 }
 
 ```
-
-If you wish to avoid all of this, just make use of the `use` statements, like this:
-
-`use App\Http\Motors\STAFFmotor as STAFFmotor` 
-
-for instance.
 
 ######Note that the multilayer conventions stands heavily on the shortnamed classes, so adding these aliases is of higher importance.
  Available commands
