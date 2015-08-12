@@ -5,8 +5,14 @@ namespace Hamzaouaghad\Multilayering\Console\Commands\Datalayer;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 
+use Hamzaouaghad\Multilayering\Console\Commands\Common as Common;
+
+
 class MakeDatalayerClass extends GeneratorCommand
 {
+
+    use Common;
+
     protected $type = 'Eloquent Class <<Object>>';
 
     private $dirPath = 'edenho\multilayergenerator';
@@ -48,6 +54,9 @@ class MakeDatalayerClass extends GeneratorCommand
         $name = $this->parseName($this->getNameInput());
         $name = $this->editName($name);
 
+        $aliasLoader = "\t\t\t\t$" . "loader->alias('" .$this->shortenName($name). "', '" . "$name" . "');";
+        $aliasLoader = "//DummyAliasLoadingForObjects\n".$aliasLoader;
+
         if ($this->files->exists($path = $this->getPath($name))) {
             $this->error($this->type.' already exists!');
 
@@ -59,6 +68,8 @@ class MakeDatalayerClass extends GeneratorCommand
         $this->files->put($path, $this->buildClass($name));
 
         $this->info($this->type.' created successfully.'.$name.'.php');
+
+        $this->updateProvider('//DummyAliasLoadingForObjects', $aliasLoader);
     }
 
     protected function editName($name)

@@ -6,8 +6,13 @@ use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 
+use Hamzaouaghad\Multilayering\Console\Commands\Common as Common;
+
 class MakeDatalayerRepo extends GeneratorCommand
 {
+
+    use Common;
+
     protected $type    = 'Repository';
 
     private $dirPath = 'edenho\multilayergenerator';
@@ -50,9 +55,16 @@ class MakeDatalayerRepo extends GeneratorCommand
     public function fire()
     {
         $name      = $this->parseName($this->getNameInput());
-        $name = $this->editName($name);
+        $name = $this->editName($name); //Correcting the path
 
-        if ($this->files->exists($path = $this->getPath($name))) {
+        $repoName = $name.'Repository'; //Adding 'repository' to the name.
+
+        $aliasLoader = "\t\t\t\t$" . "loader->alias('" .$this->shortenName($name). "', '" . "$name" . "');";
+        $aliasLoader1 = "\n\t\t\t\t$" . "loader->alias('" .$this->shortenName($name). "RepoInterface" ."', '" . "$name" . "');";
+
+        $aliasLoader = "//DummyAliasLoadingForRepositories\n".$aliasLoader;
+
+        if ($this->files->exists($path = $this->getPath($repoName))) {
             $this->error($this->type.' already exists!');
 
             return false;
@@ -60,9 +72,11 @@ class MakeDatalayerRepo extends GeneratorCommand
 
         $this->makeDirectory($path);
 
-        $this->files->put($path, $this->buildClass($name));
+        $this->files->put($path, $this->buildClass($repoName));
 
-        $this->info($this->type.' created successfully. '.$name.'.php');
+        $this->info($this->type.' created successfully. '.$repoName.'.php');
+
+        $this->updateProvider('//DummyAliasLoadingForRepositories', $aliasLoader);
     }
 
     protected function editName($name)
@@ -74,8 +88,8 @@ class MakeDatalayerRepo extends GeneratorCommand
     protected function buildClass($name)
     {
         $stub              = $this->files->get($this->getStub());
-        $interface         = $this->parseInterface($this->getInterfaceInput());
-        $class             = $this->parseClass($this->getClassInput());
+        $interface         = $this->parse($this->getInterfaceInput());
+        $class             = $this->parse($this->getClassInput());
 
         $replacedNamespace = $this->replaceNamespace($stub, $name);
 
@@ -122,7 +136,7 @@ class MakeDatalayerRepo extends GeneratorCommand
 
 
 
-    protected function parseInterface($name)
+    protected function parse($name)
     {
         $rootNamespace = $this->laravel->getNamespace();
 
@@ -136,22 +150,6 @@ class MakeDatalayerRepo extends GeneratorCommand
 
         return $this->parseName($this->getDefaultNamespace(trim($rootNamespace, '\\')).'\\'.$name);
     }
-
-    protected function parseClass($name)
-    {
-        $rootNamespace = $this->laravel->getNamespace();
-
-        if (Str::startsWith($name, $rootNamespace)) {
-            return $name;
-        }
-
-        if (Str::contains($name, '/')) {
-            $name = str_replace('/', '\\', $name);
-        }
-
-        return $this->parseName($this->getDefaultNamespace(trim($rootNamespace, '\\')).'\\'.$name);
-    }
-
 
 
     protected function getInterfaceInput()

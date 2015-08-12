@@ -28,9 +28,10 @@ Make sure you add this line in your `Config\app.php`
 save and run
 
 ```bash
+ $ composer dumpautoload -o
  $ php artisan vendor:publish
  ```
- Now to go your 'app/providers/', you will find two new providers add :
+ Now to go your 'app/providers/', you will find a new providers added :
 
 `MultilayerGeneratorServiceProvider`
 
@@ -39,9 +40,22 @@ save and run
  ```bash
  php artisan make:multilayer
  ```
- 
- And afterwards, go to your service providers, and uncomment the abstract motor class as well as the crudtrait in `MultilayeringGeneratorServiceProvider`.
 
+ And afterwards, again, add this to your providers:
+ ```php
+ App\Providers\MultilayeringGeneratorServiceProvider`.
+```
+
+Again,
+
+```bash
+$ composer dumpautoload -o
+$ php artisan vendor:publish
+```
+
+I could easily automate the process of adding all of these service providers and calling them for you, however, this is never the best approach, if not a bad practice, as adding them manually -unlinke automatic registering- actually keeps track of all of the service providers you are using, in your providers array.
+
+So bare the pain of keeping your work organized, it's worth it.
 
  If you wish to quicken the paste, and bake all, you may use the following command :
  ```bash

@@ -13,6 +13,7 @@ use MakeDataLayer;
 use BakeDataLayer;
 use MakeHttplayerAbstractMotor;
 use MakeHttpLayerMotor;
+use MakeHttpLayerTrait;
 use BakeAll;
 
 class RegisterCommandsServiceProvider extends ServiceProvider
@@ -26,12 +27,15 @@ class RegisterCommandsServiceProvider extends ServiceProvider
         MakeDatalayerClass::class,
         MakeDatalayerInterface::class,
         MakeDatalayerRepo::class,
+
         MakeMultilayerSkeleton::class,
+
         MakeHttpLayer::class,
         MakeDataLayer::class,
         BakeDataLayer::class,
         MakeHttplayerAbstractMotor::class,
         MakeHttpLayerMotor::class,
+        MakeHttpLayerTrait::class,
         BakeAll::class,
     ];
     

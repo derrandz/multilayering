@@ -7,8 +7,13 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use InputOption;
 
+use Hamzaouaghad\Multilayering\Console\Commands\Common as Common;
+
 class MakeHttpLayerMotor extends GeneratorCommand
 {
+
+    use Common;
+
     /**
      *
      *
@@ -59,6 +64,9 @@ class MakeHttpLayerMotor extends GeneratorCommand
         $name      = $this->parseName($this->getNameInput());
         $fileName = $this->editName($name);
 
+        $aliasLoader = "\t\t\t\t$" . "loader->alias('" .$this->shortenName($fileName). "', '" . "$fileName" . "');";
+        $aliasLoader = "//DummyAliasLoadingForMotors\n".$aliasLoader;
+
         if ($this->files->exists($path = $this->getPath($fileName))) {
             $this->error($this->type.' already exists!');
 
@@ -70,6 +78,8 @@ class MakeHttpLayerMotor extends GeneratorCommand
         $this->files->put($path, $this->buildClass($name));
 
         $this->info($this->type.' created successfully. '.$fileName.'.php');
+
+        $this->updateProvider('//DummyAliasLoadingForMotors', $aliasLoader);
     }
 
     protected function editName($name)

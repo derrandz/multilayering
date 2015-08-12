@@ -50,7 +50,7 @@ class BakeAll extends Command
         }
 
         $this->info($this->callBakeDatalayer($class, $repository, $interface));
-        // $this->info($this->callMakeMotor($motor, $trait, $repository));
+        $this->info($this->callMakeMotor($motor, $trait, $repository));
 
         $this->info('');
         $this->info('=========================================');

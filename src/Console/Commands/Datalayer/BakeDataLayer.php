@@ -47,20 +47,20 @@ class BakeDataLayer extends Command
 
         if(is_null( $interface = $this->getInterfaceInput() ))
         {
-            $interface = $this->makeInterfaceName();
+            $interface = $class;
         }
         else
         {
-            $interface = $interface.'Interface';
+            $interface = $interface;
         }
 
         if(is_null( $repository = $this->getRepositoryInput() ))
         {
-            $repository = $this->makeRepositoryName();
+            $repository = $class;
         }
         else
         {
-            $repository = $repository.'Repository';
+            $repository = $repository;
         }
 
         Artisan::call('make:datalayer:class', ['name' => $class]);
@@ -77,16 +77,6 @@ class BakeDataLayer extends Command
         $repositoryOutput = Artisan::output();
 
         $this->info($classOutput.$interfaceOutput.$repositoryOutput);
-    }
-
-    protected function makeInterfaceName()
-    {
-        return $this->getClassArgument().'Interface';
-    }
-
-    protected function makeRepositoryName()
-    {
-        return $this->getClassArgument().'Repository';
     }
 
     /*

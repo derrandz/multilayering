@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 namespace App\Providers;
 
@@ -23,53 +23,56 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        /*
+         |
+         |---------------------------------------------------------------------------------
+         | Please do not uncomment the commented lines, do not delete them, nor edit them.
+         | any action will result in serious damage to the package functionality.
+         |--------------------------------------------------------------------------------
+         |
+         */
+
 
         $this->app->booting(function(){
             $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         /*
          |
-         | Repositories Classes
-         |
-         |
-         |  Add your newly created repositories as follows
+         | Interfaces
          |
          */
+            //DummyAliasLoadingForInterfaces
 
-            // $loader->alias('MyClassRepository', 'App\DataLayer\Repositories\MyClassRepository');
-            // $loader->alias('MyClassRepoInterface', 'MyClassRepository');
+        /*
+         |
+         | Repositories Classes
+         |
+         */
+            //DummyAliasLoadingForRepositories
             
         /*
          |
          | Object Classes
          |
-         |
-         | Add your newly created object classes as follows
-         |
          */
          
-            // $loader->alias('MyClass', 'App\DataLayer\Objects\MyClass');
+            //DummyAliasLoadingForObjects
 
         /*
          |
          | Traits 
          |  
-         | If you have generated any traits, add them as follows.
-         | if you have generated the whole directory structure with `make:multilayer`
-         | Uncomment the 'crudtrait' trait and vendor:publish
-         |
          */
-            // $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');
+            $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');
+            //DummyAliasLoadingForTraits
 
         /*
          |
          | Motors
          |  
-         |
-         | Add your newly created motor
          */
 
-            // $loader->alias('Motor', 'App\Http\Motors\Motor');
-            // $loader->alias('MyNewMotor', 'App\Http\Controllers\Motors\MyNewMotor');
+            $loader->alias('Motor', 'App\Http\Motors\Motor');
+            //DummyAliasLoadingForMotors
         });
 
     }

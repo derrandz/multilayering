@@ -4,9 +4,11 @@ namespace Hamzaouaghad\Multilayering\Console\Commands\Datalayer;
 
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
+use Hamzaouaghad\Multilayering\Console\Commands\Common as Common;
 
 class MakeDatalayerInterface extends GeneratorCommand
 {
+    use Common;
 
     protected $type = "Interface has been created!";
     /**
@@ -48,6 +50,9 @@ class MakeDatalayerInterface extends GeneratorCommand
         $name = $this->parseName($this->getNameInput());
         $name = $this->editName($name);
 
+        $aliasLoader = "\t\t\t\t$" . "loader->alias('" .$this->shortenName($name). "', '" . "$name" . "');";
+        $aliasLoader = "//DummyAliasLoadingForInterfaces\n".$aliasLoader;
+
         if ($this->files->exists($path = $this->getPath($name))) {
             $this->error($this->type.' already exists!');
 
@@ -59,11 +64,13 @@ class MakeDatalayerInterface extends GeneratorCommand
         $this->files->put($path, $this->buildClass($name));
 
         $this->info($this->type.' created successfully.'.$name.'.php');
+
+        $this->updateProvider('//DummyAliasLoadingForInterfaces', $aliasLoader);
     }
 
     protected function editName($name)
     {
-        return str_replace("App", "App\Datalayer\Contracts", $name);
+        return str_replace("App", "App\Datalayer\Contracts", $name.'Interface');
     }
 
     protected function replaceClass($stub, $name)

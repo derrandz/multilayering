@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Http\Traits;
+
+use View;
+use Input;
+use Lang;
+use Redirect;
+
+/*
+ |/////////////////////////////////////////////////////
+
+ | Trait description
+ 
+ |////////////////////////////////////////////////////
+ */
+
+
+trait DummyTrait
+{
+
+	//public function myFuction(){}
+}
