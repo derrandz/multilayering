@@ -181,7 +181,6 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
 
 ```
 
-######Note that the multilayer conventions stands heavily on the shortnamed classes, so adding these aliases is of higher importance.
  Available commands
 ```bash
 
