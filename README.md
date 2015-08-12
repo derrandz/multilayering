@@ -210,6 +210,11 @@ php artisan make:datalayer:class <name>
 php artisan make:datalayer:interface <name>
 
 php artisan make:datalayer:repository <name> (with options: --interface= the one you wish your repo to implement, --class=The class whose repo is this
+
+php artisan make:httplayer:motor <name>  --trait= : The trait that is desired to be used --repository= : A specific repository to be implemented
+
+php artisan make:httplayer:trait <name>
+
 ```
 ## Contributing
 
