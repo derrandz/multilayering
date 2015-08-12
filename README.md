@@ -165,7 +165,7 @@ class MultilayerGeneratorServiceProvider extends ServiceProvider
          |  
          */
             $loader->alias('CRUDtrait', 'App\Http\Traits\CRUDtrait');//don't modify this.
-            $loader->alias('AuthenticationTrait', 'App\Http\Traits\Authentication');
+            $loader->alias('AuthenticationTrait', 'App\Http\Traits\AuthenticationTrait');
 
         /*
          |
