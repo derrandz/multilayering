@@ -44,24 +44,33 @@ class BakeAll extends Command
         $trait      = $this->getTraitInput();
         $motor      = $this->getMotorInput();
 
-        Artisan::call('bake:datalayer', [
-                                                 'class' => $class,
-                                                 '--repository' => $repository,
-                                                 '--interface'  => $interface, 
-                                                 ]);
+        if(is_null($motor))
+        {
+            $motor = $class;
+        }
 
-        Artisan::call('make:httplayer:motor', [
-                                                'name' => $motor,
-                                                '--trait' => $trait,
-                                                '--repository' => $repository,
-                                                      ]);
+        $this->info($this->callBakeDatalayer($class, $repository, $interface));
+        // $this->info($this->callMakeMotor($motor, $trait, $repository));
 
         $this->info('');
         $this->info('=========================================');
         $this->info('All baked rigth! Proceed!');
         $this->info('=========================================');
-        $this->info('');
+        $this->info('');    
         return true;
+    }
+
+    protected function callMakeMotor($motor, $trait, $repository)
+    {
+        Artisan::call('make:httplayer:motor', ['name' => $motor, '--trait' => $trait, '--repository' => $repository]);
+        return Artisan::output();
+    }
+
+    protected function callBakeDatalayer($class, $repository, $interface)
+    {
+        Artisan::call('bake:datalayer', ['class' => $class, '--repository' => $repository, '--interface'  => $interface]);
+
+        return Artisan::output();
     }
 
     protected function getNameInput()

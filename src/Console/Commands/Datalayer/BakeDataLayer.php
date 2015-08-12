@@ -64,19 +64,19 @@ class BakeDataLayer extends Command
         }
 
         Artisan::call('make:datalayer:class', ['name' => $class]);
-        $this->info( Artisan::output() );
+        $classOutput = Artisan::output();
 
         Artisan::call('make:datalayer:interface', ['name' => $interface]);
-        $this->info( Artisan::output() );
+        $interfaceOutput = Artisan::output();
 
         Artisan::call('make:datalayer:repository',[ 
                                                     'name'          => $repository, 
                                                     '--interface'   => $interface, 
                                                     '--class'       => $class
                                                     ]);
-        $this->info(Artisan::output());
+        $repositoryOutput = Artisan::output();
 
-        return true;
+        $this->info($classOutput.$interfaceOutput.$repositoryOutput);
     }
 
     protected function makeInterfaceName()
