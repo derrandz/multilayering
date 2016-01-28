@@ -43,7 +43,7 @@ save and run
 
  And afterwards, again, add this to your providers:
  ```php
- App\Providers\MultilayeringGeneratorServiceProvider`.
+ App\Providers\MultilayerGeneratorServiceProvider`.
 ```
 
 Again,
